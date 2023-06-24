@@ -52,7 +52,7 @@ const headerAppender = (selector) => {
 
 
 
-  const header = Header("The Future of Programming", "June 23, 2023", "1337°K");
+  const header = Header("The Next Stages of Programming", "June 23, 2023", "1337°K");
   document.querySelector(selector).appendChild(header);
 }
 
