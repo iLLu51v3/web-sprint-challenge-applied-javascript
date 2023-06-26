@@ -58,7 +58,29 @@ const Card = (article) => {
   //
 
 const cardAppender = (selector) => {
- 
+  
+  axios.get('http://localhost:5001/api/articles')
+  .then(({ data }) => {
+    // const articles = Object.values(data.articles).reduce((acc, val) => acc.concat(val), []);
+    const articles = Object.values(data.articles).flat()
+    const container = document.querySelector(selector)
+    articles.forEach(article => container.append(Card(article)))
+  })
 }
+export { Card, cardAppender };
 
-export { Card, cardAppender }
+//Object.values() is used to obtain the array data within, which needs to be flattened 
+/**
+ * .flat() is what is used to flatten the array
+ * .flat() returns a new array, merging all nested arrays into one
+ * It does not modify the original array.
+ * .flat() simplifies the working of its elements by flattening them down to one level*/ 
+// 
+/**
+ * const articles = Object.values(data.articles).reduce((acc, val) => acc.concat(val), []);
+ * the use of .reduce() can also be utilized instead of .flat()
+ * reduce() takes an accumulator (acc), and current value (val) as arguments.
+ * It concatenates, .concat() , each nested array value with the concurrent acc value
+ * The acc value starts @ 0 or empty []
+ * The result will return an single flattened array that includes all article objects to be processed by Card
+ */
